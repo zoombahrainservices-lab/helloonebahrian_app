@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "HelloOne Bahrain",
-    "slug": "helloonebh",
+    "slug": "hellobahrain-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -36,7 +36,8 @@
     },
     "scheme": "hellobahrain",
     "updates": {
-      "enabled": false,
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0
     },
     "runtimeVersion": {
@@ -55,6 +56,5 @@
       "android",
       "web"
     ]
-    }
   }
 }

@@ -215,3 +215,303 @@ export default function AppNavigator() {
     </NavigationContainer>
   );
 }
+
+      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#dc2626', // Red color
+          },
+          headerTintColor: '#ffffff', // White text
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 18,
+          },
+        }}
+      >
+        <Stack.Screen 
+          name="MainTabs" 
+          component={MainTabs} 
+          options={{ 
+            headerShown: false, // Hide stack header, use tab header instead
+          }} 
+        />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetailScreen}
+          options={{ 
+            title: 'Product Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={{ 
+            title: 'Checkout',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ 
+            title: 'Login',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ 
+            title: 'Register',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="OrderDetail"
+          component={OrderDetailScreen}
+          options={{ 
+            title: 'Order Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Orders"
+          component={OrdersScreen}
+          options={{ 
+            title: 'My Orders',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#dc2626', // Red color
+          },
+          headerTintColor: '#ffffff', // White text
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 18,
+          },
+        }}
+      >
+        <Stack.Screen 
+          name="MainTabs" 
+          component={MainTabs} 
+          options={{ 
+            headerShown: false, // Hide stack header, use tab header instead
+          }} 
+        />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetailScreen}
+          options={{ 
+            title: 'Product Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={{ 
+            title: 'Checkout',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ 
+            title: 'Login',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ 
+            title: 'Register',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="OrderDetail"
+          component={OrderDetailScreen}
+          options={{ 
+            title: 'Order Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Orders"
+          component={OrdersScreen}
+          options={{ 
+            title: 'My Orders',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#dc2626', // Red color
+          },
+          headerTintColor: '#ffffff', // White text
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 18,
+          },
+        }}
+      >
+        <Stack.Screen 
+          name="MainTabs" 
+          component={MainTabs} 
+          options={{ 
+            headerShown: false, // Hide stack header, use tab header instead
+          }} 
+        />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetailScreen}
+          options={{ 
+            title: 'Product Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={{ 
+            title: 'Checkout',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ 
+            title: 'Login',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{ 
+            title: 'Register',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="OrderDetail"
+          component={OrderDetailScreen}
+          options={{ 
+            title: 'Order Details',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+        <Stack.Screen
+          name="Orders"
+          component={OrdersScreen}
+          options={{ 
+            title: 'My Orders',
+            headerStyle: {
+              backgroundColor: '#dc2626',
+            },
+            headerTintColor: '#ffffff',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

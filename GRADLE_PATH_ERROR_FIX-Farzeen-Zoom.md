@@ -115,3 +115,4 @@ After applying the fix:
 - The fix we applied (explicit android.icon) is a workaround that often resolves the issue
 - If it persists, it may require waiting for an Expo SDK update
 
+

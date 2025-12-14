@@ -69,38 +69,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-
-
-
-
-    
-    // Suppress verbose logging for expected payment gateway errors
-    if (__DEV__ && error.response?.data?.message?.toLowerCase().includes('eazypay')) {
-      // Only log in dev mode, but don't spam console
-      // The error will still be passed to the component for handling
-    }
-    
-    return Promise.reject(error);
-  }
-);
-
-export default api;
-
-
-
-
-    
-    // Suppress verbose logging for expected payment gateway errors
-    if (__DEV__ && error.response?.data?.message?.toLowerCase().includes('eazypay')) {
-      // Only log in dev mode, but don't spam console
-      // The error will still be passed to the component for handling
-    }
-    
-    return Promise.reject(error);
-  }
-);
-
-export default api;
-
-
-

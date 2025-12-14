@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { api } from '@/lib/api';
 import { supabaseHelpers } from '@/lib/supabase-helpers';
 import { Product } from '@/lib/types';
 import { useCart } from '@/contexts/CartContext';
@@ -47,27 +46,15 @@ export default function ProductDetailScreen() {
     try {
       setLoading(true);
       
-      // Try Supabase first, fallback to API
-      let productData: Product | null = null;
-      try {
-        productData = await supabaseHelpers.getProductBySlug(slug);
-        if (productData) {
-          setProduct(productData);
-        }
-      } catch (supabaseError) {
-        if (__DEV__) {
-          console.warn('Supabase product fetch failed, trying API:', supabaseError);
-        }
-        const response = await api.get(`/api/products/${slug}`);
-        productData = response.data;
-        setProduct(productData);
-      }
+      const productData = await supabaseHelpers.getProductBySlug(slug);
 
       if (!productData) {
         Alert.alert('Error', 'Product not found');
         navigation.goBack();
         return;
       }
+
+      setProduct(productData);
 
       // Fetch related products
       try {
@@ -76,27 +63,13 @@ export default function ProductDetailScreen() {
           limit: 4,
         });
         setRelatedProducts(
-          relatedResult.data.filter((p: Product) => p._id !== productData!._id)
+          relatedResult.data.filter((p: Product) => p._id !== productData._id)
         );
-      } catch (supabaseError) {
+      } catch (error) {
         if (__DEV__) {
-          console.warn('Supabase related products fetch failed, trying API:', supabaseError);
+          console.error('Error fetching related products:', error);
         }
-        try {
-          const relatedResponse = await api.get('/api/products', {
-            params: { category: productData.category, limit: 4 },
-          });
-          setRelatedProducts(
-            (relatedResponse.data.items || relatedResponse.data.products || []).filter(
-              (p: Product) => p._id !== productData!._id
-            )
-          );
-        } catch (apiError) {
-          if (__DEV__) {
-            console.error('Error fetching related products:', apiError);
-          }
-          setRelatedProducts([]);
-        }
+        setRelatedProducts([]);
       }
     } catch (error) {
       if (__DEV__) {
@@ -518,141 +491,3 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 });
-
-
-
-
-    paddingVertical: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  addToCartButtonDisabled: {
-    backgroundColor: '#9ca3af',
-    opacity: 0.5,
-  },
-  addToCartText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  loginPrompt: {
-    padding: 12,
-    backgroundColor: '#fef3c7',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#fde047',
-  },
-  loginPromptText: {
-    fontSize: 14,
-    color: '#92400e',
-    textAlign: 'center',
-  },
-  relatedSection: {
-    padding: 16,
-    backgroundColor: '#f9fafb',
-  },
-  relatedTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#111827',
-  },
-  relatedProduct: {
-    width: 200,
-    marginRight: 12,
-  },
-});
-
-
-
-
-    paddingVertical: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  addToCartButtonDisabled: {
-    backgroundColor: '#9ca3af',
-    opacity: 0.5,
-  },
-  addToCartText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  loginPrompt: {
-    padding: 12,
-    backgroundColor: '#fef3c7',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#fde047',
-  },
-  loginPromptText: {
-    fontSize: 14,
-    color: '#92400e',
-    textAlign: 'center',
-  },
-  relatedSection: {
-    padding: 16,
-    backgroundColor: '#f9fafb',
-  },
-  relatedTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#111827',
-  },
-  relatedProduct: {
-    width: 200,
-    marginRight: 12,
-  },
-});
-
-
-
-
-    paddingVertical: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  addToCartButtonDisabled: {
-    backgroundColor: '#9ca3af',
-    opacity: 0.5,
-  },
-  addToCartText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  loginPrompt: {
-    padding: 12,
-    backgroundColor: '#fef3c7',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#fde047',
-  },
-  loginPromptText: {
-    fontSize: 14,
-    color: '#92400e',
-    textAlign: 'center',
-  },
-  relatedSection: {
-    padding: 16,
-    backgroundColor: '#f9fafb',
-  },
-  relatedTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#111827',
-  },
-  relatedProduct: {
-    width: 200,
-    marginRight: 12,
-  },
-});
-
-
-
