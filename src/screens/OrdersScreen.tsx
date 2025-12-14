@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { supabaseHelpers } from '@/lib/supabase-helpers';
+import { api } from '@/lib/api';
 import { Order } from '@/lib/types';
 import { formatPrice } from '@/lib/currency';
 import { useAuth } from '@/contexts/AuthContext';
@@ -34,44 +34,10 @@ export default function OrdersScreen() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      if (!user) {
-        setOrders([]);
-        setLoading(false);
-        return;
-      }
-      
-      // Get user ID - prioritize id over _id, and ensure it's a string
-      const userId = user.id || user._id;
-      
-      if (!userId) {
-        if (__DEV__) {
-          console.warn('No user ID available for fetching orders:', user);
-        }
-        setOrders([]);
-        setLoading(false);
-        return;
-      }
-      
-      if (__DEV__) {
-        console.log('Fetching orders for user:', userId);
-      }
-      
-      const orders = await supabaseHelpers.getUserOrders(String(userId));
-      
-      if (__DEV__) {
-        console.log('Orders fetched:', orders?.length || 0);
-      }
-      
-      setOrders(orders || []);
-    } catch (error: any) {
+      const response = await api.get('/api/orders/my');
+      setOrders(response.data.orders || response.data || []);
+    } catch (error) {
       console.error('Error fetching orders:', error);
-      if (__DEV__) {
-        console.error('Error details:', {
-          message: error?.message,
-          code: error?.code,
-          user: user ? { id: user.id, _id: user._id } : null,
-        });
-      }
       setOrders([]);
     } finally {
       setLoading(false);

@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { api } from '@/lib/api';
 import { supabaseHelpers } from '@/lib/supabase-helpers';
 import { Product, Category } from '@/lib/types';
 import ProductCard from '@/components/ProductCard';
@@ -27,8 +28,19 @@ export default function ProductListScreen() {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const categoriesData = await supabaseHelpers.getCategories();
-      setCategories(categoriesData);
+      // Try Supabase first, fallback to API
+      try {
+        const categoriesData = await supabaseHelpers.getCategories();
+        setCategories(categoriesData);
+      } catch (supabaseError) {
+        if (__DEV__) {
+          console.warn('Supabase categories fetch failed, trying API:', supabaseError);
+        }
+        const response = await api.get('/api/categories');
+        if (response.data && Array.isArray(response.data)) {
+          setCategories(response.data);
+        }
+      }
     } catch (error) {
       if (__DEV__) {
         console.error('Error fetching categories:', error);
@@ -64,18 +76,35 @@ export default function ProductListScreen() {
         params.search = searchTerm;
       }
 
-      const result = await supabaseHelpers.searchProducts(params);
-      const fetchedProducts = result.data || [];
-      
-      if (page === 1) {
-        setProducts(fetchedProducts);
-      } else {
-        setProducts((prev) => [...prev, ...fetchedProducts]);
+      // Try Supabase first, fallback to API
+      try {
+        const result = await supabaseHelpers.searchProducts(params);
+        const fetchedProducts = result.data || [];
+        
+        if (page === 1) {
+          setProducts(fetchedProducts);
+        } else {
+          setProducts((prev) => [...prev, ...fetchedProducts]);
+        }
+        
+        // Calculate total pages from count
+        const totalItems = result.count || 0;
+        setTotalPages(Math.ceil(totalItems / (params.limit || 12)));
+      } catch (supabaseError) {
+        if (__DEV__) {
+          console.warn('Supabase products fetch failed, trying API:', supabaseError);
+        }
+        const response = await api.get('/api/products', { params });
+        const fetchedProducts = response.data.items || [];
+        
+        if (page === 1) {
+          setProducts(fetchedProducts);
+        } else {
+          setProducts((prev) => [...prev, ...fetchedProducts]);
+        }
+        
+        setTotalPages(response.data.totalPages || 1);
       }
-      
-      // Calculate total pages from count
-      const totalItems = result.count || 0;
-      setTotalPages(Math.ceil(totalItems / (params.limit || 12)));
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { api } from '@/lib/api';
 import { supabaseHelpers } from '@/lib/supabase-helpers';
 import { Product, Banner, Category } from '@/lib/types';
 import ProductCard from '@/components/ProductCard';
@@ -41,8 +42,21 @@ export default function HomeScreen() {
 
   const fetchBanners = useCallback(async () => {
     try {
-      const banners = await supabaseHelpers.getActiveBanners();
-      setBanners(banners);
+      // Try Supabase first, fallback to API
+      try {
+        const banners = await supabaseHelpers.getActiveBanners();
+        setBanners(banners);
+      } catch (supabaseError) {
+        if (__DEV__) {
+          console.warn('Supabase fetch failed, trying API:', supabaseError);
+        }
+        const response = await api.get('/api/banners/active', {
+          params: { _t: Date.now() },
+        });
+        if (response.data && Array.isArray(response.data)) {
+          setBanners(response.data);
+        }
+      }
     } catch (error: any) {
       if (__DEV__) {
         console.error('Error fetching banners:', error);
@@ -53,8 +67,21 @@ export default function HomeScreen() {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const categories = await supabaseHelpers.getCategories();
-      setCategories(categories);
+      // Try Supabase first, fallback to API
+      try {
+        const categories = await supabaseHelpers.getCategories();
+        setCategories(categories);
+      } catch (supabaseError) {
+        if (__DEV__) {
+          console.warn('Supabase fetch failed, trying API:', supabaseError);
+        }
+        const response = await api.get('/api/categories', {
+          params: { _t: Date.now() },
+        });
+        if (response.data && Array.isArray(response.data)) {
+          setCategories(response.data);
+        }
+      }
     } catch (error: any) {
       if (__DEV__) {
         console.error('Error fetching categories:', error);
@@ -80,11 +107,24 @@ export default function HomeScreen() {
         params.search = searchTerm;
       }
 
-      const result = await supabaseHelpers.searchProducts(params);
-      if (__DEV__) {
-        console.log('Products from Supabase:', result.data.length);
+      // Try Supabase first, fallback to API
+      try {
+        const result = await supabaseHelpers.searchProducts(params);
+        if (__DEV__) {
+          console.log('Products from Supabase:', result.data.length);
+        }
+        setProducts(result.data);
+      } catch (supabaseError) {
+        if (__DEV__) {
+          console.warn('Supabase fetch failed, trying API:', supabaseError);
+        }
+        const response = await api.get('/api/products', { params });
+        const fetchedProducts = response.data?.items || response.data?.products || (Array.isArray(response.data) ? response.data : []);
+        if (__DEV__) {
+          console.log('Fetched products count:', fetchedProducts.length);
+        }
+        setProducts(fetchedProducts);
       }
-      setProducts(result.data);
     } catch (error: any) {
       if (__DEV__) {
         console.error('Error fetching products:', error);

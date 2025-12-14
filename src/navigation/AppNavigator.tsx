@@ -43,7 +43,7 @@ import OrderDetailScreen from '../screens/OrderDetailScreen';
 
 // Types
 export type RootStackParamList = {
-  MainTabs: { screen?: keyof MainTabParamList } | undefined;
+  MainTabs: undefined;
   ProductDetail: { slug: string };
   Checkout: undefined;
   Login: { redirect?: string } | undefined;
@@ -67,8 +67,8 @@ function MainTabs() {
 
   return (
     <Tab.Navigator
-      screenOptions={({ route }: any) => ({
-        tabBarIcon: ({ focused, color, size }: any) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName: string;
 
           if (route.name === 'Home') {

@@ -17,8 +17,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { formatPrice } from '@/lib/currency';
-import { api } from '@/lib/api'; // Only for payment gateway (third-party service)
-import { supabaseHelpers } from '@/lib/supabase-helpers';
+import { api } from '@/lib/api';
 import { RootStackParamList } from '@/navigation/AppNavigator';
 import * as Linking from 'expo-linking';
 
@@ -83,13 +82,8 @@ export default function CheckoutScreen() {
     // For COD - handle separately, no payment gateway needed
     if (paymentMethod === 'cod') {
       try {
-        if (!user?.id && !user?._id) {
-          throw new Error('User not authenticated');
-        }
-
-        // Create order for COD using Supabase
-        const order = await supabaseHelpers.createOrder({
-          userId: user.id || user._id || '',
+        // Create order for COD
+        const orderResponse = await api.post('/api/orders', {
           items: items.map((item) => ({
             productId: item.productId,
             name: item.name,
@@ -103,7 +97,7 @@ export default function CheckoutScreen() {
           paymentStatus: 'unpaid',
         });
 
-        const orderId = order._id || order.id;
+        const orderId = orderResponse.data.order?._id || orderResponse.data._id || orderResponse.data.id || orderResponse.data.order?.id;
 
         if (!orderId) {
           throw new Error('Order ID not received from server');
@@ -140,13 +134,8 @@ export default function CheckoutScreen() {
 
     // For Card or Benefit - create order then payment session
     try {
-      if (!user?.id && !user?._id) {
-        throw new Error('User not authenticated');
-      }
-
-      // Create order first using Supabase
-      const order = await supabaseHelpers.createOrder({
-        userId: user.id || user._id || '',
+      // Create order first
+      const orderResponse = await api.post('/api/orders', {
         items: items.map((item) => ({
           productId: item.productId,
           name: item.name,
@@ -160,7 +149,7 @@ export default function CheckoutScreen() {
         paymentStatus: 'unpaid',
       });
 
-      const orderId = order._id || order.id;
+      const orderId = orderResponse.data.order?._id || orderResponse.data._id || orderResponse.data.id || orderResponse.data.order?.id;
 
       if (!orderId) {
         throw new Error('Order ID not received from server');

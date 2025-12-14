@@ -8,10 +8,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { supabaseHelpers } from '@/lib/supabase-helpers';
+import { api } from '@/lib/api';
 import { Order } from '@/lib/types';
 import { formatPrice } from '@/lib/currency';
-import { useAuth } from '@/contexts/AuthContext';
 import { RootStackParamList } from '@/navigation/AppNavigator';
 
 type OrderDetailRouteProp = RouteProp<RootStackParamList, 'OrderDetail'>;
@@ -19,7 +18,6 @@ type OrderDetailRouteProp = RouteProp<RootStackParamList, 'OrderDetail'>;
 export default function OrderDetailScreen() {
   const route = useRoute<OrderDetailRouteProp>();
   const { orderId } = route.params;
-  const { user } = useAuth();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -34,15 +32,10 @@ export default function OrderDetailScreen() {
   const fetchOrder = async () => {
     try {
       setLoading(true);
-      if (!user?.id && !user?._id) {
-        setOrder(null);
-        return;
-      }
-      const order = await supabaseHelpers.getOrderById(orderId, user.id || user._id || '');
-      setOrder(order);
+      const response = await api.get(`/api/orders/${orderId}`);
+      setOrder(response.data.order || response.data);
     } catch (error) {
       console.error('Error fetching order:', error);
-      setOrder(null);
     } finally {
       setLoading(false);
     }

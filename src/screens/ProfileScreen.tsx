@@ -20,9 +20,7 @@ if (Platform.OS !== 'web') {
   try {
     Ionicons = require('@expo/vector-icons').Ionicons;
   } catch (e) {
-    if (__DEV__) {
-      console.warn('Ionicons not available');
-    }
+    console.warn('Ionicons not available');
   }
 }
 
@@ -47,54 +45,30 @@ export default function ProfileScreen() {
   const navigation = useNavigation<NavigationProp>();
 
   const handleLogout = async () => {
-    const performLogout = async () => {
-      try {
-        await logout();
-        // Force navigation reset
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Login' }],
-        });
-        
-        // On web, also clear any cached state
-        if (Platform.OS === 'web' && typeof window !== 'undefined') {
-          // Clear any session storage
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: async () => {
           try {
-            if (window.sessionStorage) {
-              window.sessionStorage.clear();
-            }
-            if (window.localStorage) {
-              window.localStorage.removeItem('token');
-            }
-          } catch (e) {
-            // Ignore storage errors
+            await logout();
+            // Reset navigation to Login screen
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+            });
+          } catch (error) {
+            console.error('Logout error:', error);
+            // Still navigate to login even if logout fails
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+            });
           }
-        }
-      } catch (error) {
-        console.error('Logout error:', error);
-        // Still navigate to login even if logout fails
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Login' }],
-        });
-      }
-    };
-
-    if (Platform.OS === 'web') {
-      // On web, use confirm instead of Alert
-      if (typeof window !== 'undefined' && window.confirm('Are you sure you want to logout?')) {
-        await performLogout();
-      }
-    } else {
-      Alert.alert('Logout', 'Are you sure you want to logout?', [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Logout',
-          style: 'destructive',
-          onPress: performLogout,
         },
-      ]);
-    }
+      },
+    ]);
   };
 
   if (loading) {

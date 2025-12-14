@@ -11,7 +11,6 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from '@/contexts/AuthContext';
@@ -23,32 +22,21 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export default function LoginScreen() {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<LoginRouteProp>();
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth();
 
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    // Trim and validate inputs
-    const trimmedIdentifier = identifier.trim();
-    const trimmedPassword = password.trim();
-    
-    if (!trimmedIdentifier) {
-      Alert.alert('Error', 'Please enter your email or username');
-      return;
-    }
-    
-    if (!trimmedPassword) {
-      Alert.alert('Error', 'Please enter your password');
+    if (!identifier || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
     setLoading(true);
     try {
-      await login(trimmedIdentifier, trimmedPassword);
+      await login(identifier, password);
       // Navigate based on redirect or default to home
       const redirect = route.params?.redirect;
       if (redirect) {
@@ -64,37 +52,9 @@ export default function LoginScreen() {
         navigation.navigate('MainTabs', { screen: 'Home' });
       }
     } catch (error: any) {
-      // Handle Supabase errors - they have a message property directly
-      const errorMessage = error?.message || error?.response?.data?.message || 'Invalid credentials. Please check your email/username and password.';
-      Alert.alert('Login Failed', errorMessage);
+      Alert.alert('Login Failed', error.response?.data?.message || 'Invalid credentials');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setGoogleLoading(true);
-    try {
-      await loginWithGoogle();
-      // Navigate based on redirect or default to home
-      const redirect = route.params?.redirect;
-      if (redirect) {
-        if (redirect.startsWith('ProductDetail:')) {
-          const slug = redirect.replace('ProductDetail:', '');
-          navigation.navigate('ProductDetail', { slug });
-        } else if (redirect === 'Cart' || redirect === 'Checkout') {
-          navigation.navigate('MainTabs', { screen: 'Cart' });
-        } else {
-          navigation.navigate('MainTabs', { screen: 'Home' });
-        }
-      } else {
-        navigation.navigate('MainTabs', { screen: 'Home' });
-      }
-    } catch (error: any) {
-      const errorMessage = error?.message || 'Google Sign-In failed. Please try again.';
-      Alert.alert('Google Sign-In Failed', errorMessage);
-    } finally {
-      setGoogleLoading(false);
     }
   };
 
@@ -121,26 +81,14 @@ export default function LoginScreen() {
             />
 
             <Text style={styles.label}>Password</Text>
-            <View style={styles.passwordContainer}>
-              <TextInput
-                style={styles.passwordInput}
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Enter your password"
-                secureTextEntry={!showPassword}
-                autoCapitalize="none"
-              />
-              <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={() => setShowPassword(!showPassword)}
-              >
-                <Ionicons
-                  name={showPassword ? 'eye-off' : 'eye'}
-                  size={20}
-                  color="#6b7280"
-                />
-              </TouchableOpacity>
-            </View>
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter your password"
+              secureTextEntry
+              autoCapitalize="none"
+            />
 
             <TouchableOpacity
               style={[styles.loginButton, loading && styles.loginButtonDisabled]}
@@ -151,27 +99,6 @@ export default function LoginScreen() {
                 <ActivityIndicator color="#fff" />
               ) : (
                 <Text style={styles.loginButtonText}>Login</Text>
-              )}
-            </TouchableOpacity>
-
-            <View style={styles.divider}>
-              <View style={styles.dividerLine} />
-              <Text style={styles.dividerText}>OR</Text>
-              <View style={styles.dividerLine} />
-            </View>
-
-            <TouchableOpacity
-              style={[styles.googleButton, (loading || googleLoading) && styles.googleButtonDisabled]}
-              onPress={handleGoogleLogin}
-              disabled={loading || googleLoading}
-            >
-              {googleLoading ? (
-                <ActivityIndicator color="#4285F4" />
-              ) : (
-                <>
-                  <Ionicons name="logo-google" size={20} color="#4285F4" />
-                  <Text style={styles.googleButtonText}>Continue with Google</Text>
-                </>
               )}
             </TouchableOpacity>
 
@@ -239,25 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#111827',
   },
-  passwordContainer: {
-    position: 'relative',
-  },
-  passwordInput: {
-    backgroundColor: '#f9fafb',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    borderRadius: 8,
-    padding: 12,
-    paddingRight: 45,
-    fontSize: 16,
-    color: '#111827',
-  },
-  eyeIcon: {
-    position: 'absolute',
-    right: 12,
-    top: 12,
-    padding: 4,
-  },
   loginButton: {
     backgroundColor: '#dc2626',
     paddingVertical: 16,
@@ -285,41 +193,6 @@ const styles = StyleSheet.create({
   registerLink: {
     fontSize: 14,
     color: '#dc2626',
-    fontWeight: '600',
-  },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#e5e7eb',
-  },
-  dividerText: {
-    marginHorizontal: 16,
-    fontSize: 14,
-    color: '#6b7280',
-    fontWeight: '500',
-  },
-  googleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    paddingVertical: 16,
-    borderRadius: 8,
-    gap: 12,
-  },
-  googleButtonDisabled: {
-    opacity: 0.5,
-  },
-  googleButtonText: {
-    color: '#374151',
-    fontSize: 16,
     fontWeight: '600',
   },
 });

@@ -348,3 +348,282 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
 });
+
+
+
+
+        <View style={styles.indicators}>
+          {banners.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                index === currentIndex && styles.indicatorActive,
+              ]}
+            />
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  bannerContainer: {
+    width,
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  content: {
+    position: 'absolute',
+    inset: 0,
+    padding: 16,
+  },
+  textContainer: {
+    maxWidth: '90%',
+  },
+  title: {
+    marginBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  subtitle: {
+    marginBottom: 16,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  ctaButton: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  ctaText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  indicators: {
+    position: 'absolute',
+    bottom: 16,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
+  indicatorActive: {
+    backgroundColor: '#ffffff',
+  },
+});
+
+
+
+
+        <View style={styles.indicators}>
+          {banners.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                index === currentIndex && styles.indicatorActive,
+              ]}
+            />
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  bannerContainer: {
+    width,
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  content: {
+    position: 'absolute',
+    inset: 0,
+    padding: 16,
+  },
+  textContainer: {
+    maxWidth: '90%',
+  },
+  title: {
+    marginBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  subtitle: {
+    marginBottom: 16,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  ctaButton: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  ctaText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  indicators: {
+    position: 'absolute',
+    bottom: 16,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
+  indicatorActive: {
+    backgroundColor: '#ffffff',
+  },
+});
+
+
+
+
+        <View style={styles.indicators}>
+          {banners.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                index === currentIndex && styles.indicatorActive,
+              ]}
+            />
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  bannerContainer: {
+    width,
+    height: BANNER_HEIGHT,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  content: {
+    position: 'absolute',
+    inset: 0,
+    padding: 16,
+  },
+  textContainer: {
+    maxWidth: '90%',
+  },
+  title: {
+    marginBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  subtitle: {
+    marginBottom: 16,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+  },
+  ctaButton: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  ctaText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  indicators: {
+    position: 'absolute',
+    bottom: 16,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  },
+  indicatorActive: {
+    backgroundColor: '#ffffff',
+  },
+});
+
+
+

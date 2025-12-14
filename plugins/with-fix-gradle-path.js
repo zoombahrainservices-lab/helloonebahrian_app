@@ -1,20 +1,4 @@
-// Try to load config plugins - use built-in if available, fallback to @expo/config-plugins
-let withAppBuildGradle;
-try {
-  withAppBuildGradle = require('expo/config-plugins').withAppBuildGradle;
-} catch (e) {
-  try {
-    withAppBuildGradle = require('@expo/config-plugins').withAppBuildGradle;
-  } catch (e2) {
-    // If neither works, return config unchanged
-    console.warn('Config plugins not available, Gradle fix plugin disabled');
-    module.exports = function withFixGradlePath(config) {
-      return config;
-    };
-    // Exit early - don't define the function below
-    return;
-  }
-}
+const { withAppBuildGradle } = require('expo/config-plugins');
 
 /**
  * Fixes the Expo SDK 51 bug where an empty path is generated in build.gradle at line 33
@@ -25,9 +9,6 @@ try {
  * 4. Any other empty path variables
  */
 module.exports = function withFixGradlePath(config) {
-  if (!withAppBuildGradle) {
-    return config;
-  }
   return withAppBuildGradle(config, (config) => {
     if (config.modResults.language === 'groovy') {
       let contents = config.modResults.contents;
