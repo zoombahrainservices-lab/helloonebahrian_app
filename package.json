@@ -30,7 +30,7 @@
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "@supabase/supabase-js": "^2.87.1",
+    "@supabase/supabase-js": "^2.38.0",
     "axios": "^1.6.2",
     "expo": "~51.0.0",
     "expo-auth-session": "^7.0.10",
@@ -72,6 +72,9 @@
     "metro": "~0.80.8",
     "metro-config": "~0.80.8",
     "metro-resolver": "~0.80.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "private": true
 }

@@ -20,7 +20,9 @@ if (Platform.OS !== 'web') {
   try {
     Ionicons = require('@expo/vector-icons').Ionicons;
   } catch (e) {
-    console.warn('Ionicons not available');
+    if (__DEV__) {
+      console.warn('Ionicons not available');
+    }
   }
 }
 

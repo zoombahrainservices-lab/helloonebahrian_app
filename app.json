@@ -53,8 +53,7 @@
             "DEFAULT"
           ]
         }
-      ],
-      "googleServicesFile": "./google-services.json"
+      ]
     },
     "scheme": "hellobahrain",
     "updates": {
