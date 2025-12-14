@@ -1,0 +1,147 @@
+# Exclude everything except mobile directory
+client/
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Exclude all markdown files (documentation)
+*.md
+!mobile/README.md
+
+# Exclude test files
+*.test.*
+*.spec.*
+App.test.*
+App.simple.*
+
+# Exclude development scripts
+*.bat
+*.sh
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude package locks
+package-lock.json
+yarn.lock
+
+client/
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Exclude all markdown files (documentation)
+*.md
+!mobile/README.md
+
+# Exclude test files
+*.test.*
+*.spec.*
+App.test.*
+App.simple.*
+
+# Exclude development scripts
+*.bat
+*.sh
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude package locks
+package-lock.json
+yarn.lock
+
+client/
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Exclude all markdown files (documentation)
+*.md
+!mobile/README.md
+
+# Exclude test files
+*.test.*
+*.spec.*
+App.test.*
+App.simple.*
+
+# Exclude development scripts
+*.bat
+*.sh
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude package locks
+package-lock.json
+yarn.lock
+
+client/
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Exclude all markdown files (documentation)
+*.md
+!mobile/README.md
+
+# Exclude test files
+*.test.*
+*.spec.*
+App.test.*
+App.simple.*
+
+# Exclude development scripts
+*.bat
+*.sh
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude package locks
+package-lock.json
+yarn.lock
+
+
+
