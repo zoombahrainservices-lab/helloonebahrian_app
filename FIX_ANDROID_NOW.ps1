@@ -61,7 +61,7 @@ Write-Host ""
 # Check if android folder exists, if not, prebuild first
 if (-not (Test-Path "android")) {
     Write-Host "Generating Android native code..." -ForegroundColor Cyan
-    npx expo prebuild --platform android --clean
+    & npx expo prebuild --platform android --clean
     
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Prebuild failed!" -ForegroundColor Red
@@ -76,7 +76,7 @@ Write-Host "Building and installing APK on emulator..." -ForegroundColor Cyan
 Write-Host "This may take 10-15 minutes. Please be patient..." -ForegroundColor Yellow
 Write-Host ""
 
-npx expo run:android
+& npx expo run:android
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""
