@@ -34,14 +34,44 @@ export default function OrdersScreen() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      if (!user?.id && !user?._id) {
+      if (!user) {
         setOrders([]);
+        setLoading(false);
         return;
       }
-      const orders = await supabaseHelpers.getUserOrders(user.id || user._id || '');
-      setOrders(orders);
-    } catch (error) {
+      
+      // Get user ID - prioritize id over _id, and ensure it's a string
+      const userId = user.id || user._id;
+      
+      if (!userId) {
+        if (__DEV__) {
+          console.warn('No user ID available for fetching orders:', user);
+        }
+        setOrders([]);
+        setLoading(false);
+        return;
+      }
+      
+      if (__DEV__) {
+        console.log('Fetching orders for user:', userId);
+      }
+      
+      const orders = await supabaseHelpers.getUserOrders(String(userId));
+      
+      if (__DEV__) {
+        console.log('Orders fetched:', orders?.length || 0);
+      }
+      
+      setOrders(orders || []);
+    } catch (error: any) {
       console.error('Error fetching orders:', error);
+      if (__DEV__) {
+        console.error('Error details:', {
+          message: error?.message,
+          code: error?.code,
+          user: user ? { id: user.id, _id: user._id } : null,
+        });
+      }
       setOrders([]);
     } finally {
       setLoading(false);
