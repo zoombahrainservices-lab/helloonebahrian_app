@@ -8,10 +8,20 @@
     "start:tunnel": "expo start --tunnel",
     "android": "expo run:android",
     "android:build": "powershell -ExecutionPolicy Bypass -File ./BUILD_NOW.ps1",
-    "android:setup": "powershell -ExecutionPolicy Bypass -File ./build-and-run-android.ps1",
+    "android:setup": "powershell -ExecutionPolicy Bypass -File ./build-and-run-android-fixed.ps1",
+    "android:fix": "powershell -ExecutionPolicy Bypass -File ./FIX_ANDROID_NOW.ps1",
     "android:expo-go": "powershell -ExecutionPolicy Bypass -File ./scripts/open-android.ps1",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:android": "eas build --platform android",
+    "build:ios": "eas build --platform ios",
+    "build:all": "eas build --platform all",
+    "build:preview": "eas build --profile preview --platform android",
+    "build:production": "eas build --profile production --platform android",
+    "submit:android": "eas submit --platform android",
+    "submit:ios": "eas submit --platform ios",
+    "update": "eas update",
+    "check": "npx expo-doctor"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.3",
