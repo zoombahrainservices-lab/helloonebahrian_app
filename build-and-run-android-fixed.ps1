@@ -394,3 +394,4 @@ if ($emulatorRunning) {
     Write-Host "ERROR: Emulator is not running!" -ForegroundColor Red
     exit 1
 }
+

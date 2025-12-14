@@ -293,3 +293,4 @@ if ($emulatorRunning) {
         exit 1
     }
 }
+

@@ -1,0 +1,15 @@
+# Ignore files from EAS build
+node_modules/
+.expo/
+.expo-shared/
+*.log
+.DS_Store
+android/.gradle/
+android/app/build/
+ios/build/
+ios/Pods/
+*.xcworkspace
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+# Ignore duplicate mobile/mobile directory
+mobile/

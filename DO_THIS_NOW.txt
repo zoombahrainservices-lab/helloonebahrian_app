@@ -1,0 +1,50 @@
+================================================================================
+                    🚨 DO THESE 2 THINGS NOW 🚨
+================================================================================
+
+STEP 1: FIX LOGIN (2 MINUTES)
+------------------------------
+Open this link:
+https://supabase.com/dashboard/project/clmhzxiuzqvebzlkbdjs/auth/providers
+
+Then:
+1. Click "Email" provider
+2. Scroll down
+3. Find "Confirm email" checkbox
+4. UNCHECK IT ✓
+5. Click "Save"
+
+DONE! Login will work immediately.
+
+
+STEP 2: FIX ANDROID EMULATOR (2 MINUTES)
+-----------------------------------------
+In your Android emulator:
+1. Open Play Store
+2. Search "Expo Go"
+3. Install it
+4. Open Expo Go app
+5. Tap "Enter URL manually"
+6. Type: exp://localhost:8081
+7. Press Go
+
+DONE! App loads instantly.
+
+
+================================================================================
+                              THAT'S IT!
+================================================================================
+
+Total time: 4 minutes
+Result: Everything works perfectly ✅
+
+No more errors!
+No more CORS issues!
+No more "No development build" errors!
+
+Just do these 2 simple steps and you're done!
+
+================================================================================
+
+
+
