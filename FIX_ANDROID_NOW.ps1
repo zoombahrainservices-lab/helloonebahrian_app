@@ -43,14 +43,14 @@ if (-not $devices) {
     Write-Host ""
     Write-Host "Please:" -ForegroundColor Yellow
     Write-Host "1. Start Android Studio" -ForegroundColor White
-    Write-Host "2. Tools → Device Manager" -ForegroundColor White
+    Write-Host "2. Tools -> Device Manager" -ForegroundColor White
     Write-Host "3. Start an emulator" -ForegroundColor White
     Write-Host "4. Wait for it to fully boot" -ForegroundColor White
     Write-Host "5. Run this script again" -ForegroundColor White
     exit 1
 }
 
-Write-Host "✓ Emulator is running" -ForegroundColor Green
+Write-Host "Emulator is running" -ForegroundColor Green
 
 # Step 2: Build and install development build
 Write-Host ""
@@ -67,7 +67,7 @@ if (-not (Test-Path "android")) {
         Write-Host "Prebuild failed!" -ForegroundColor Red
         exit 1
     }
-    Write-Host "✓ Prebuild complete" -ForegroundColor Green
+    Write-Host "Prebuild complete" -ForegroundColor Green
 }
 
 # Build and install
@@ -81,7 +81,7 @@ Write-Host ""
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""
     Write-Host "========================================" -ForegroundColor Green
-    Write-Host "✓ SUCCESS! Development build installed!" -ForegroundColor Green
+    Write-Host "SUCCESS! Development build installed!" -ForegroundColor Green
     Write-Host "========================================" -ForegroundColor Green
     Write-Host ""
     Write-Host "Now you can:" -ForegroundColor Cyan
