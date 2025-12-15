@@ -1,0 +1,38 @@
+========================================
+  YOUR SHA-1 FINGERPRINT
+========================================
+
+SHA-1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+
+Package Name: com.hellobahrain.mobile
+
+========================================
+  ADD TO GOOGLE CLOUD CONSOLE
+========================================
+
+1. Go to: https://console.cloud.google.com/
+
+2. APIs & Services -> Credentials
+
+3. Create Credentials -> OAuth client ID
+
+4. Application type: Android
+
+5. Package name: com.hellobahrain.mobile
+
+6. SHA-1 certificate fingerprint:
+   5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+
+7. Click Create
+
+8. Copy the Android Client ID
+
+9. Add to Supabase:
+   - Go to Supabase Dashboard
+   - Authentication -> Providers -> Google
+   - Add Android Client ID
+
+========================================
+
+
+

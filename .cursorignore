@@ -1,0 +1,7 @@
+# Ignore template files
+**/BACKEND_*.ts
+**/API_ROUTE_*.ts
+
+# Ignore documentation
+*.md
+

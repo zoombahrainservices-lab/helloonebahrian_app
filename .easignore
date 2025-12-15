@@ -1,0 +1,195 @@
+# Exclude client directory (not needed for mobile app)
+../client/
+
+# Exclude documentation files
+*.md
+!README.md
+
+# Exclude test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+App.test.tsx
+App.simple.tsx
+
+# Exclude development scripts
+*.bat
+install-android-studio.bat
+start.bat
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude node_modules (already excluded by default, but explicit)
+node_modules/
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude package lock (not needed for build)
+package-lock.json
+
+../client/
+
+# Exclude documentation files
+*.md
+!README.md
+
+# Exclude test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+App.test.tsx
+App.simple.tsx
+
+# Exclude development scripts
+*.bat
+install-android-studio.bat
+start.bat
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude node_modules (already excluded by default, but explicit)
+node_modules/
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude package lock (not needed for build)
+package-lock.json
+
+../client/
+
+# Exclude documentation files
+*.md
+!README.md
+
+# Exclude test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+App.test.tsx
+App.simple.tsx
+
+# Exclude development scripts
+*.bat
+install-android-studio.bat
+start.bat
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude node_modules (already excluded by default, but explicit)
+node_modules/
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude package lock (not needed for build)
+package-lock.json
+
+../client/
+
+# Exclude documentation files
+*.md
+!README.md
+
+# Exclude test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+App.test.tsx
+App.simple.tsx
+
+# Exclude development scripts
+*.bat
+install-android-studio.bat
+start.bat
+
+# Exclude temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+.expo/
+web-build/
+
+# Exclude node_modules (already excluded by default, but explicit)
+node_modules/
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude package lock (not needed for build)
+package-lock.json
+
+
+
