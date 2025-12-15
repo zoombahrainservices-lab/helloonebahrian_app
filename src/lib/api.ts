@@ -3,16 +3,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
 // Get API base URL from environment or use default
-// For production, set EXPO_PUBLIC_API_BASE_URL in your .env or app.json
-const API_BASE_URL = Constants.expoConfig?.extra?.apiBaseUrl || 
-  process.env.EXPO_PUBLIC_API_BASE_URL || 
+// For production, set EXPO_PUBLIC_API_BASE_URL in your .env or app config
+const API_BASE_URL =
+  Constants.expoConfig?.extra?.apiBaseUrl ||
+  process.env.EXPO_PUBLIC_API_BASE_URL ||
   'https://hello-bahrain-e-commerce-client.vercel.app';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json',
   },
   timeout: 30000,
   withCredentials: false,
@@ -36,19 +37,15 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Add response interceptor for error handling
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      // Handle unauthorized - clear token and redirect to login
+      // Handle unauthorized - clear token
       try {
         await AsyncStorage.removeItem('token');
       } catch (e) {
@@ -57,50 +54,17 @@ api.interceptors.response.use(
         }
       }
     }
-    
-    // Suppress verbose logging for expected payment gateway errors
-    if (__DEV__ && error.response?.data?.message?.toLowerCase().includes('eazypay')) {
-      // Only log in dev mode, but don't spam console
-      // The error will still be passed to the component for handling
+
+    // Suppress verbose logging for expected payment gateway errors (dev only)
+    const message = error.response?.data?.message;
+    if (__DEV__ && typeof message === 'string' && message.toLowerCase().includes('eazypay')) {
+      // Intentionally minimal logging; UI still receives the error.
     }
-    
+
     return Promise.reject(error);
   }
 );
 
 export default api;
-
-
-
-
-    
-    // Suppress verbose logging for expected payment gateway errors
-    if (__DEV__ && error.response?.data?.message?.toLowerCase().includes('eazypay')) {
-      // Only log in dev mode, but don't spam console
-      // The error will still be passed to the component for handling
-    }
-    
-    return Promise.reject(error);
-  }
-);
-
-export default api;
-
-
-
-
-    
-    // Suppress verbose logging for expected payment gateway errors
-    if (__DEV__ && error.response?.data?.message?.toLowerCase().includes('eazypay')) {
-      // Only log in dev mode, but don't spam console
-      // The error will still be passed to the component for handling
-    }
-    
-    return Promise.reject(error);
-  }
-);
-
-export default api;
-
 
 
