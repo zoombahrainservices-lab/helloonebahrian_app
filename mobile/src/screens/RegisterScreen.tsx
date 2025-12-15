@@ -11,22 +11,11 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from '@/contexts/AuthContext';
 import { RootStackParamList } from '@/navigation/AppNavigator';
-
-// Conditionally import Ionicons
-let Ionicons: any;
-if (Platform.OS !== 'web') {
-  try {
-    Ionicons = require('@expo/vector-icons').Ionicons;
-  } catch (e) {
-    if (__DEV__) {
-      console.warn('Ionicons not available, using fallback');
-    }
-  }
-}
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
@@ -125,15 +114,11 @@ export default function RegisterScreen() {
                 onPress={() => setShowPassword(!showPassword)}
                 activeOpacity={0.7}
               >
-                {Platform.OS === 'web' || !Ionicons ? (
-                  <Text style={styles.eyeIcon}>{showPassword ? '🙈' : '👁️'}</Text>
-                ) : (
-                  <Ionicons
-                    name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                    size={20}
-                    color="#6b7280"
-                  />
-                )}
+                <Ionicons
+                  name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                  size={20}
+                  color="#6b7280"
+                />
               </TouchableOpacity>
             </View>
 
